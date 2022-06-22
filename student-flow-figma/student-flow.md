@@ -1,31 +1,31 @@
 # student-flow
 
-<h2>Consulted with our design manager Swapnali Thakar and opted to change the student flow to be cleaner and more modern in design.</h2>
+### Consulted with our design manager Swapnali Thakar and opted to change the student flow to be cleaner and more modern in design.
 
-# Dashboard
+## Dashboard
 
-<img src="../student-flow-figma/student-dashboard-completed.png"/>
+![New Student Dashboard](/student-flow-figma/completed/student-dashboard-complete.png)
 
-# My Tasks
+## My Tasks
 
-<img src="../student-flow-figma/student-tasks-completed.png"/>
+![New Student Tasks](/student-flow-figma/completed/student-tasks-complete.png)
 
-# Messages
+## Messages
 
-<img src="../student-flow-figma/student-messages-completed.png"/>
+![New Student Messages](/student-flow-figma/completed/student-messages-complete.png)
 
-# Resources
+## Resources
 
-<img src="../student-flow-figma/student-resources-completed.png"/>
+![New Student Resources](/student-flow-figma/completed/student-resources-complete.png)
 
-# Portfolio
+## Portfolio
 
-<img src="../student-flow-figma/student-portfolio-completed.png"/>
+![New Student Portfolio](/student-flow-figma/completed/student-portfolio-complete.png)
 
-# Progress
+## Progress
 
-<img src="../student-flow-figma/student-progress-completed.png"/>
+![New Student Progress](/student-flow-figma/completed/student-progress-complete.png)
 
-# Achievements
+## Achievements
 
-<img src="../student-flow-figma/student-achievements-completed.png"/>
+![New Student Achievements](/student-flow-figma/completed/student-achievements-complete.png)
