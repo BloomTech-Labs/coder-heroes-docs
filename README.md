@@ -18,12 +18,9 @@ Documentation for the Coder Heroes LMS Labs project
 
 The main goal of this epic is to push out a working website and get the first version of the web app live. It will primarily be a “homepage” but will include some basic functionality. The [existing website](https://www.coderheroes.com/) was built using [SquareSpace](https://www.squarespace.com/) and we should handle the basic features from that site.
 
----
+### BL-462 - FE: I want to find information that will tell me about CoderHeroes
 
-### BL-462 - FE: I want to find information that will tell me about CoderHeroes (Ready for Review)
-
-_Assignee: Kevin Lee_
-_Co-owner: Danny Chui_
+_Assignee: Kevin Lee_ - _Co-owner: Danny Chui_
 
 **The scope of this ticket is for small tuning of existing work that can be tweaked before launch.**
 
@@ -36,10 +33,9 @@ When consumers visit the CoderHeroes website, they can find information that wil
   - Added details for pages that should be complete.
     - Worked with stakeholder to retrieve content, such as site terms and privacy policy.
 
-### BL-464 - FE: I want to be able to express my interest in the program (In Progress)
+### BL-464 - FE: I want to be able to express my interest in the program
 
-_Assignee: Landon Phillips_
-_Co-owner: Reed Lauckern_
+_Assignee: Landon Phillips_ - _Co-owner: Reed Lauckern_
 
 When a consumer visits the CoderHero website, they should be able to express their interest in the program, so that they can be kept in touch with updates.
 
@@ -49,24 +45,21 @@ When a consumer visits the CoderHero website, they should be able to express the
   - Reference the original website for ideas on what is needed.
   - Ideally we will have a single form where a user can select if they are a parent or a teacher, with the former being the default.
 
-### BL-465 - Update product doc repository to include homepage launch details (In Progress)
+### BL-465 - Update product doc repository to include homepage launch details
 
-_Assignee: Rebecca Stone_
-_Co-owner: Tony Kordysh_
+_Assignee: Rebecca Stone_ - _Co-owner: Tony Kordysh_
 
 Make updates to the product documentation [repository](https://github.com/BloomTech-Labs/coder-heroes-docs) based on the changes of this epic.
 
-### BL-466 - Write and implement unit tests for homepage features (Ready for Review)
+### BL-466 - Write and implement unit tests for homepage features
 
-_Assignee: Michael Subbarao_
-_Co-owner: Dirk J Knibbe_
+_Assignee: Michael Subbarao_ - _Co-owner: Dirk J Knibbe_
 
 Implemented at least 3 tests to verify the case data is the expected shape and in the proper format.
 
-### BL-486 - BE: I want to find information that will tell me about CoderHeroes (In Progress)
+### BL-486 - BE: I want to find information that will tell me about CoderHeroes
 
-_Assignee: Kevin Lee_
-_Co-owner: Danny Chui_
+_Assignee: Kevin Lee_ - _Co-owner: Danny Chui_
 
 **The scope of this ticket is for small tuning of existing work that can be tweaked before launch.**
 
@@ -77,10 +70,9 @@ When A consumer visits the CoderHeroes website, they should be able to find info
   - Used the Figma mockups design as a guide for flow.
   - Working with frontend team to ensure that unused links are hidden for features/pages that are not ready to go live with this version.
 
-### BL-502 - UX: Create a new set of site fonts to be used on the app (In Progress)
+### BL-502 - UX: Create a new set of site fonts to be used on the app
 
-_Assignee: Conrad Klek_
-_Co-owner: James Fincher_
+_Assignee: Conrad Klek_ - _Co-owner: James Fincher_
 
 **This ticket is only to update the assets in Figma. Once the stakeholder approves of the changes, then we can apply the updated fonts to the entire mockup designs as well as on the web app itself.**
 
@@ -91,10 +83,9 @@ Including a monospaced option for a code-like presentation of text, or to show a
 - The two fonts to be used are Roboto and Roboto Mono (both are available in Figma by default).
 - Consider using all caps, font size, and keep font weights to a minimum (maybe 3-4 at the most).
 
-### BL-513 - UX: Iterate design artifacts to include About and Services pages (In Progress)
+### BL-513 - UX: Iterate design artifacts to include About and Services pages
 
-_Assignee: Danny Chui_
-_Co-owner: Kevin Lee_
+_Assignee: Danny Chui_ - _Co-owner: Kevin Lee_
 
 Iterate the Figma design artifacts for this product. The current state of Figma is for a complete version of the CoderHeroes app. This release is about a simplified version of the earliest features.
 
