@@ -4,13 +4,13 @@ Documentation for the Coder Heroes LMS Labs project
 
 [BL-461 CoderHeros homepage launch details](#bl-461---coderheros-homepage-launch-details)
 
-- [BL-462](#bl-462---fe-i-want-to-find-information-that-will-tell-me-about-coderheroes) FE: I want to find information that will tell me about CoderHeroes
-- [BL-464](#bl-464---fe-i-want-to-be-able-to-express-my-interest-in-the-program) FE: I want to be able to express my interest in the program
-- [BL-465](#bl-465---update-product-doc-repository-to-include-homepage-launch-details) Update product doc repository to include homepage launch details
-- [BL-466](#bl-466---write-and-implement-unit-tests-for-homepage-features) Write and implement unit tests for homepage features
-- [BL-486](#bl-486---be-i-want-to-find-information-that-will-tell-me-about-coderheroes) BE: I want to find information that will tell me about CoderHeroes
-- [BL-502](#bl-502---ux-create-a-new-set-of-site-fonts-to-be-used-on-the-app) UX: Create a new set of site fonts to be used on the app
-- [BL-513](#bl-513---ux-iterate-design-artifacts-to-include-about-and-services-pages) UX: Iterate design artifacts to include About and Services pages
+    - [BL-462](#bl-462---fe-i-want-to-find-information-that-will-tell-me-about-coderheroes) - FE: I want to find information that will tell me about CoderHeroes
+    - [BL-464](#bl-464---fe-i-want-to-be-able-to-express-my-interest-in-the-program) - FE: I want to be able to express my interest in the program
+    - [BL-465](#bl-465---update-product-doc-repository-to-include-homepage-launch-details) - Update product doc repository to include homepage launch details
+    - [BL-466](#bl-466---write-and-implement-unit-tests-for-homepage-features) - Write and implement unit tests for homepage features
+    - [BL-486](#bl-486---be-i-want-to-find-information-that-will-tell-me-about-coderheroes) - BE: I want to find information that will tell me about CoderHeroes
+    - [BL-502](#bl-502---ux-create-a-new-set-of-site-fonts-to-be-used-on-the-app) - UX: Create a new set of site fonts to be used on the app
+    - [BL-513](#bl-513---ux-iterate-design-artifacts-to-include-about-and-services-pages) - UX: Iterate design artifacts to include About and Services pages
 
 ---
 
@@ -26,12 +26,12 @@ _Assignee: Kevin Lee_ - _Co-owner: Danny Chui_
 
 When consumers visit the CoderHeroes website, they can find information that will tell them about CoderHeroes, so they can be informed about the program.
 
-- Details:
-  - A lot of development work has already been completed. The purpose of this ticket was to ensure that the site is clean, free of broken links, and incomplete features are hidden from view.
-    - We have hide the instructor search section as that will be built out in a future epic.
-  - Ensured that site looks and behaves as expected (responsiveness, design, etc.). Used the Figma mockups design as a guide.
-  - Added details for pages that should be complete.
-    - Worked with stakeholder to retrieve content, such as site terms and privacy policy.
+    - Details:
+        - A lot of development work has already been completed. The purpose of this ticket was to ensure that the site is clean, free of broken links, and incomplete features are hidden from view.
+            - We have hide the instructor search section as that will be built out in a future epic.
+        - Ensured that site looks and behaves as expected (responsiveness, design, etc.). Used the Figma mockups design as a guide.
+        - Added details for pages that should be complete.
+            - Worked with stakeholder to retrieve content, such as site terms and privacy policy.
 
 ### BL-464 - FE: I want to be able to express my interest in the program
 
