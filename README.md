@@ -2,13 +2,25 @@
 
 Documentation for the Coder Heroes LMS Labs project
 
+[BL-461 CoderHeros homepage launch details](/DOCUMENTATION/BL-461.md)
+
+- [BL-462](/DOCUMENTATION/BL-461.md#bl-462---fe-i-want-to-find-information-that-will-tell-me-about-coderheroes-ready-for-review) FE: I want to find information that will tell me about CoderHeroes
+- [BL-464](/DOCUMENTATION/BL-461.md#bl-464---fe-i-want-to-be-able-to-express-my-interest-in-the-program-in-progress) FE: I want to be able to express my interest in the program
+- [BL-465](/DOCUMENTATION/BL-461.md#bl-465---update-product-doc-repository-to-include-homepage-launch-details-in-progress) Update product doc repository to include homepage launch details
+- [BL-466](/DOCUMENTATION/BL-461.md#bl-466---write-and-implement-unit-tests-for-homepage-features-ready-for-review) Write and implement unit tests for homepage features
+- [BL-486](/DOCUMENTATION/BL-461.md#bl-486---be-i-want-to-find-information-that-will-tell-me-about-coderheroes-in-progress) BE: I want to find information that will tell me about CoderHeroes
+- [BL-502](/DOCUMENTATION/BL-461.md#bl-502---ux-create-a-new-set-of-site-fonts-to-be-used-on-the-app-in-progress) UX: Create a new set of site fonts to be used on the app
+- [BL-513](/DOCUMENTATION/BL-461.md#bl-513---ux-iterate-design-artifacts-to-include-about-and-services-pages-in-progress) UX: Iterate design artifacts to include About and Services pages
+
 ---
 
 ## CoderHeros homepage launch details (BL-461)
 
 The main goal of this epic is to push out a working website and get the first version of the web app live. It will primarily be a “homepage” but will include some basic functionality. The [existing website](https://www.coderheroes.com/) was built using [SquareSpace](https://www.squarespace.com/) and we should handle the basic features from that site.
 
-### FE: I want to find information that will tell me about CoderHeroes (BL-462 Ready for Review)
+---
+
+### BL-462 - FE: I want to find information that will tell me about CoderHeroes (Ready for Review)
 
 _Assignee: Kevin Lee_
 _Co-owner: Danny Chui_
@@ -24,7 +36,7 @@ When consumers visit the CoderHeroes website, they can find information that wil
   - Added details for pages that should be complete.
     - Worked with stakeholder to retrieve content, such as site terms and privacy policy.
 
-### FE: I want to be able to express my interest in the program (BL-464 In Progress)
+### BL-464 - FE: I want to be able to express my interest in the program (In Progress)
 
 _Assignee: Landon Phillips_
 _Co-owner: Reed Lauckern_
@@ -37,14 +49,21 @@ When a consumer visits the CoderHero website, they should be able to express the
   - Reference the original website for ideas on what is needed.
   - Ideally we will have a single form where a user can select if they are a parent or a teacher, with the former being the default.
 
-### Write and implement unit tests for homepage features (BL-466 Ready for Review)
+### BL-465 - Update product doc repository to include homepage launch details (In Progress)
+
+_Assignee: Rebecca Stone_
+_Co-owner: Tony Kordysh_
+
+Make updates to the product documentation [repository](https://github.com/BloomTech-Labs/coder-heroes-docs) based on the changes of this epic.
+
+### BL-466 - Write and implement unit tests for homepage features (Ready for Review)
 
 _Assignee: Michael Subbarao_
 _Co-owner: Dirk J Knibbe_
 
 Implemented at least 3 tests to verify the case data is the expected shape and in the proper format.
 
-### BE: I want to find information that will tell me about CoderHeroes (BL-486 In Progress)
+### BL-486 - BE: I want to find information that will tell me about CoderHeroes (In Progress)
 
 _Assignee: Kevin Lee_
 _Co-owner: Danny Chui_
@@ -58,7 +77,7 @@ When A consumer visits the CoderHeroes website, they should be able to find info
   - Used the Figma mockups design as a guide for flow.
   - Working with frontend team to ensure that unused links are hidden for features/pages that are not ready to go live with this version.
 
-### UX: Create a new set of site fonts to be used on the app (BL-502 In Progress)
+### BL-502 - UX: Create a new set of site fonts to be used on the app (In Progress)
 
 _Assignee: Conrad Klek_
 _Co-owner: James Fincher_
@@ -72,7 +91,7 @@ Including a monospaced option for a code-like presentation of text, or to show a
 - The two fonts to be used are Roboto and Roboto Mono (both are available in Figma by default).
 - Consider using all caps, font size, and keep font weights to a minimum (maybe 3-4 at the most).
 
-### UX: Iterate design artifacts to include About and Services pages (BL-513 In Progress)
+### BL-513 - UX: Iterate design artifacts to include About and Services pages (In Progress)
 
 _Assignee: Danny Chui_
 _Co-owner: Kevin Lee_
