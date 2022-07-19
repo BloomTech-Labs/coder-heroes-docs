@@ -2,19 +2,19 @@
 
 Documentation for the Coder Heroes LMS Labs project
 
-[BL-461 CoderHeros homepage launch details](/DOCUMENTATION/BL-461.md)
+[BL-461 CoderHeros homepage launch details](#bl-461---coderheros-homepage-launch-details)
 
-- [BL-462](/DOCUMENTATION/BL-461.md#bl-462---fe-i-want-to-find-information-that-will-tell-me-about-coderheroes-ready-for-review) FE: I want to find information that will tell me about CoderHeroes
-- [BL-464](/DOCUMENTATION/BL-461.md#bl-464---fe-i-want-to-be-able-to-express-my-interest-in-the-program-in-progress) FE: I want to be able to express my interest in the program
-- [BL-465](/DOCUMENTATION/BL-461.md#bl-465---update-product-doc-repository-to-include-homepage-launch-details-in-progress) Update product doc repository to include homepage launch details
-- [BL-466](/DOCUMENTATION/BL-461.md#bl-466---write-and-implement-unit-tests-for-homepage-features-ready-for-review) Write and implement unit tests for homepage features
-- [BL-486](/DOCUMENTATION/BL-461.md#bl-486---be-i-want-to-find-information-that-will-tell-me-about-coderheroes-in-progress) BE: I want to find information that will tell me about CoderHeroes
-- [BL-502](/DOCUMENTATION/BL-461.md#bl-502---ux-create-a-new-set-of-site-fonts-to-be-used-on-the-app-in-progress) UX: Create a new set of site fonts to be used on the app
-- [BL-513](/DOCUMENTATION/BL-461.md#bl-513---ux-iterate-design-artifacts-to-include-about-and-services-pages-in-progress) UX: Iterate design artifacts to include About and Services pages
+- [BL-462](#bl-462---fe-i-want-to-find-information-that-will-tell-me-about-coderheroes) FE: I want to find information that will tell me about CoderHeroes
+- [BL-464](#bl-464---fe-i-want-to-be-able-to-express-my-interest-in-the-program) FE: I want to be able to express my interest in the program
+- [BL-465](#bl-465---update-product-doc-repository-to-include-homepage-launch-details) Update product doc repository to include homepage launch details
+- [BL-466](#bl-466---write-and-implement-unit-tests-for-homepage-features) Write and implement unit tests for homepage features
+- [BL-486](#bl-486---be-i-want-to-find-information-that-will-tell-me-about-coderheroes) BE: I want to find information that will tell me about CoderHeroes
+- [BL-502](#bl-502---ux-create-a-new-set-of-site-fonts-to-be-used-on-the-app) UX: Create a new set of site fonts to be used on the app
+- [BL-513](#bl-513---ux-iterate-design-artifacts-to-include-about-and-services-pages) UX: Iterate design artifacts to include About and Services pages
 
 ---
 
-## CoderHeros homepage launch details (BL-461)
+## BL-461 - CoderHeros homepage launch details
 
 The main goal of this epic is to push out a working website and get the first version of the web app live. It will primarily be a “homepage” but will include some basic functionality. The [existing website](https://www.coderheroes.com/) was built using [SquareSpace](https://www.squarespace.com/) and we should handle the basic features from that site.
 
