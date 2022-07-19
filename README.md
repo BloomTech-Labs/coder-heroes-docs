@@ -21,8 +21,8 @@ When consumers visit the CoderHeroes website, they can find information that wil
   - A lot of development work has already been completed. The purpose of this ticket was to ensure that the site is clean, free of broken links, and incomplete features are hidden from view.
     - We have hide the instructor search section as that will be built out in a future epic.
   - Ensured that site looks and behaves as expected (responsiveness, design, etc.). Used the Figma mockups design as a guide.
-  - Add details for pages that should be complete.
-    - Work with stakeholder to retrieve content, such as site terms and privacy policy.
+  - Added details for pages that should be complete.
+    - Worked with stakeholder to retrieve content, such as site terms and privacy policy.
 
 ### FE: I want to be able to express my interest in the program (BL-464 In Progress)
 
@@ -67,7 +67,7 @@ _Co-owner: James Fincher_
 
 During our stakeholder meeting with Brianne on June 30, she pointed out that the stylized font used in headers seemed a bit hard to read. She stated that she really loved the [Girls Who Code](https://girlswhocode.com/) website, and they use Roboto as the font face across the entire site.
 
-Including a monospaced option for a code-like presentation of text, or to show actual text examples (like seen on the front page of the example website). Being selective about the amount of font weights and font types used in this asset guide because the more used, the more the site will have to load each time a visitor comes to the page.
+Including a monospaced option for a code-like presentation of text, or to show actual text examples (like seen on the front page of the example website). We were selective about the amount of font weights and font types used in this asset guide because the more used, the more the site will have to load each time a visitor comes to the page.
 
 - The two fonts to be used are Roboto and Roboto Mono (both are available in Figma by default).
 - Consider using all caps, font size, and keep font weights to a minimum (maybe 3-4 at the most).
