@@ -1,14 +1,14 @@
 ## Description
 
-Made updates to the product documentation repository to include updated registration details. 
+___Add your PR description here, deleting this example___
 
 #### Video Link
 
-https://www.loom.com/share/f5873ae705eb4133bbccfdcf015874c0
+[Loom Video](Add your loom video link here)
 
 #### Trello Link
 
-https://bloomtechlabs.atlassian.net/jira/software/c/projects/BL/boards/9?modal=detail&selectedIssue=BL-480&quickFilter=28
+___Paste your trello card link here, deleting this example___
 
 (Example below):
 
@@ -16,6 +16,6 @@ https://bloomtechlabs.atlassian.net/jira/software/c/projects/BL/boards/9?modal=d
 
 ## Checklist:
 
-- [X] My design/diagram follows the style guidelines of this project
-- [X] My docs are organized within an appropriate folder structure in our repo
-- [X] Pull request description clearly describes docs made & motivations for said additions
+- [ ] My design/diagram follows the style guidelines of this project
+- [ ] My docs are organized within an appropriate folder structure in our repo
+- [ ] Pull request description clearly describes docs made & motivations for said additions
