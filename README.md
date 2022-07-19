@@ -24,7 +24,7 @@ _Assignee: Kevin Lee_ - _Co-owner: Danny Chui_
 
 **The scope of this ticket is for small tuning of existing work that can be tweaked before launch.**
 
-When consumers visit the CoderHeroes website, they can find information that will tell them about CoderHeroes, so they can be informed about the program.
+    When consumers visit the CoderHeroes website, they can find information that will tell them about CoderHeroes, so they can be informed about the program.
 
     - Details:
         - A lot of development work has already been completed. The purpose of this ticket was to ensure that the site is clean, free of broken links, and incomplete features are hidden from view.
@@ -37,25 +37,25 @@ When consumers visit the CoderHeroes website, they can find information that wil
 
 _Assignee: Landon Phillips_ - _Co-owner: Reed Lauckern_
 
-When a consumer visits the CoderHero website, they should be able to express their interest in the program, so that they can be kept in touch with updates.
+    When a consumer visits the CoderHero website, they should be able to express their interest in the program, so that they can be kept in touch with updates.
 
-- Details:
-  - This will be a panel component to be displayed on all three pages for unauthenticated users, above the footer.
-  - The Figma designs will need to be updated with this new panel.
-  - Reference the original website for ideas on what is needed.
-  - Ideally we will have a single form where a user can select if they are a parent or a teacher, with the former being the default.
+    - Details:
+        - This will be a panel component to be displayed on all three pages for unauthenticated users, above the footer.
+        - The Figma designs will need to be updated with this new panel.
+        - Reference the original website for ideas on what is needed.
+        - Ideally we will have a single form where a user can select if they are a parent or a teacher, with the former being the default.
 
 ### BL-465 - Update product doc repository to include homepage launch details
 
 _Assignee: Rebecca Stone_ - _Co-owner: Tony Kordysh_
 
-Make updates to the product documentation [repository](https://github.com/BloomTech-Labs/coder-heroes-docs) based on the changes of this epic.
+    Make updates to the product documentation [repository](https://github.com/BloomTech-Labs/coder-heroes-docs) based on the changes of this epic.
 
 ### BL-466 - Write and implement unit tests for homepage features
 
 _Assignee: Michael Subbarao_ - _Co-owner: Dirk J Knibbe_
 
-Implemented at least 3 tests to verify the case data is the expected shape and in the proper format.
+    Implemented at least 3 tests to verify the case data is the expected shape and in the proper format.
 
 ### BL-486 - BE: I want to find information that will tell me about CoderHeroes
 
@@ -63,12 +63,12 @@ _Assignee: Kevin Lee_ - _Co-owner: Danny Chui_
 
 **The scope of this ticket is for small tuning of existing work that can be tweaked before launch.**
 
-When A consumer visits the CoderHeroes website, they should be able to find information that will tell them about CoderHeroes, that way they can be informed about the program.
+    When A consumer visits the CoderHeroes website, they should be able to find information that will tell them about CoderHeroes, that way they can be informed about the program.
 
-- Details:
-  - Ensured that backend will allow site to function as expected.
-  - Used the Figma mockups design as a guide for flow.
-  - Working with frontend team to ensure that unused links are hidden for features/pages that are not ready to go live with this version.
+        - Details:
+            - Ensured that backend will allow site to function as expected.
+            - Used the Figma mockups design as a guide for flow.
+            - Working with frontend team to ensure that unused links are hidden for features/pages that are not ready to go live with this version.
 
 ### BL-502 - UX: Create a new set of site fonts to be used on the app
 
@@ -76,27 +76,27 @@ _Assignee: Conrad Klek_ - _Co-owner: James Fincher_
 
 **This ticket is only to update the assets in Figma. Once the stakeholder approves of the changes, then we can apply the updated fonts to the entire mockup designs as well as on the web app itself.**
 
-During our stakeholder meeting with Brianne on June 30, she pointed out that the stylized font used in headers seemed a bit hard to read. She stated that she really loved the [Girls Who Code](https://girlswhocode.com/) website, and they use Roboto as the font face across the entire site.
+    During our stakeholder meeting with Brianne on June 30, she pointed out that the stylized font used in headers seemed a bit hard to read. She stated that she really loved the [Girls Who Code](https://girlswhocode.com/) website, and they use Roboto as the font face across the entire site.
 
-Including a monospaced option for a code-like presentation of text, or to show actual text examples (like seen on the front page of the example website). We were selective about the amount of font weights and font types used in this asset guide because the more used, the more the site will have to load each time a visitor comes to the page.
+    Including a monospaced option for a code-like presentation of text, or to show actual text examples (like seen on the front page of the example website). We were selective about the amount of font weights and font types used in this asset guide because the more used, the more the site will have to load each time a visitor comes to the page.
 
-- The two fonts to be used are Roboto and Roboto Mono (both are available in Figma by default).
-- Consider using all caps, font size, and keep font weights to a minimum (maybe 3-4 at the most).
+    - The two fonts to be used are Roboto and Roboto Mono (both are available in Figma by default).
+    - Consider using all caps, font size, and keep font weights to a minimum (maybe 3-4 at the most).
 
 ### BL-513 - UX: Iterate design artifacts to include About and Services pages
 
 _Assignee: Danny Chui_ - _Co-owner: Kevin Lee_
 
-Iterate the Figma design artifacts for this product. The current state of Figma is for a complete version of the CoderHeroes app. This release is about a simplified version of the earliest features.
+    Iterate the Figma design artifacts for this product. The current state of Figma is for a complete version of the CoderHeroes app. This release is about a simplified version of the earliest features.
 
-Pages to include:
+    Pages to include:
 
-- About:
-  - About CoderHeroes
-  - Terms & Conditions + Privacy Policy (these can both follow the same template)
-  - Press Inquiries
-- Services:
-  - FAQ
-  - Site Map
+    - About:
+        - About CoderHeroes
+        - Terms & Conditions + Privacy Policy (these can both follow the same template)
+        - Press Inquiries
+    - Services:
+        - FAQ
+        - Site Map
 
 ---
