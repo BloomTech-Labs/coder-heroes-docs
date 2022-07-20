@@ -79,6 +79,7 @@ When A consumer visits the CoderHeroes website, they should be able to find info
 _Assignee: Conrad Klek_ - _Co-owner: James Fincher_
 
 [Figma](https://www.figma.com/file/7VBR8i7t3nbdmUp15ELqCG/CoderHeroes-Figma?node-id=0%3A1)
+
 **This ticket is only to update the assets in Figma. Once the stakeholder approves of the changes, then we can apply the updated fonts to the entire mockup designs as well as on the web app itself.**
 
 During our stakeholder meeting with Brianne on June 30, she pointed out that the stylized font used in headers seemed a bit hard to read. She stated that she really loved the [Girls Who Code](https://girlswhocode.com/) website, and they use Roboto as the font face across the entire site.
