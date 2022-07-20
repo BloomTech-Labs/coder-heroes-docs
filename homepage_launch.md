@@ -16,6 +16,8 @@ The main goal of this epic is to push out a working website and get the first ve
 
 _Assignee: Kevin Lee_ - _Co-owner: Danny Chui_
 
+[GitHub](https://github.com/BloomTech-Labs/coder-heroes-fe/tree/BL-462-fe-i-want-to-find-information-that-will-tell-me-about-coder-heroes) [Loom Video](https://www.loom.com/share/4da11d9222ab46bf895c779b25e1a2b6)
+
 **The scope of this ticket is for small tuning of existing work that can be tweaked before launch.**
 
 When consumers visit the CoderHeroes website, they can find information that will tell them about CoderHeroes, so they can be informed about the program.
@@ -31,6 +33,8 @@ When consumers visit the CoderHeroes website, they can find information that wil
 
 _Assignee: Landon Phillips_ - _Co-owner: Reed Lauckern_
 
+[GitHub](https://github.com/BloomTech-Labs/coder-heroes-fe/tree/BL-464-fe-i-want-to-be-able-to-express-my-interest-in-the-program) [Loom Video]()
+
 When a consumer visits the CoderHero website, they should be able to express their interest in the program, so that they can be kept in touch with updates.
 
 - Details:
@@ -43,17 +47,23 @@ When a consumer visits the CoderHero website, they should be able to express the
 
 _Assignee: Rebecca Stone_ - _Co-owner: Tony Kordysh_
 
+[Loom Video](https://www.loom.com/share/f566d6b893964be28ea51ddd8bcdbfb6)
+
 Make updates to the product documentation [repository](https://github.com/BloomTech-Labs/coder-heroes-docs) based on the changes of this epic.
 
 ### BL-466 - Write and implement unit tests for homepage features
 
 _Assignee: Michael Subbarao_ - _Co-owner: Dirk J Knibbe_
 
+[GitHub](https://github.com/BloomTech-Labs/coder-heroes-fe/tree/BL-466-write-and-implement-unit-tests-for-homepage-features) [Loom Video](https://www.loom.com/share/52a8dc1220ca4f05a79ebe0faf0bdedb)
+
 Implemented at least 3 tests to verify the case data is the expected shape and in the proper format.
 
 ### BL-486 - BE: I want to find information that will tell me about CoderHeroes
 
 _Assignee: Kevin Lee_ - _Co-owner: Danny Chui_
+
+[GitHub]() [Loom Video]()
 
 **The scope of this ticket is for small tuning of existing work that can be tweaked before launch.**
 
@@ -68,6 +78,7 @@ When A consumer visits the CoderHeroes website, they should be able to find info
 
 _Assignee: Conrad Klek_ - _Co-owner: James Fincher_
 
+[Figma](https://www.figma.com/file/7VBR8i7t3nbdmUp15ELqCG/CoderHeroes-Figma?node-id=0%3A1)
 **This ticket is only to update the assets in Figma. Once the stakeholder approves of the changes, then we can apply the updated fonts to the entire mockup designs as well as on the web app itself.**
 
 During our stakeholder meeting with Brianne on June 30, she pointed out that the stylized font used in headers seemed a bit hard to read. She stated that she really loved the [Girls Who Code](https://girlswhocode.com/) website, and they use Roboto as the font face across the entire site.
@@ -78,6 +89,8 @@ Including a monospaced option for a code-like presentation of text, or to show a
 - Consider using all caps, font size, and keep font weights to a minimum (maybe 3-4 at the most).
 
 ### BL-513 - UX: Iterate design artifacts to include About and Services pages
+
+[Figma](https://www.figma.com/file/7VBR8i7t3nbdmUp15ELqCG/CoderHeroes-Figma?node-id=309%3A56733)
 
 _Assignee: Danny Chui_ - _Co-owner: Kevin Lee_
 
