@@ -93,7 +93,7 @@ Including a monospaced option for a code-like presentation of text, or to show a
 
 [Figma](https://www.figma.com/file/7VBR8i7t3nbdmUp15ELqCG/CoderHeroes-Figma?node-id=309%3A56733)
 
-_Assignee: Danny Chui_ - _Co-owner: Kevin Lee_
+_Assignee: Danny Chui_ - _Co-owner: Kevin Lee_, _Savannah Maxwell_
 
 Iterate the Figma design artifacts for this product. The current state of Figma is for a complete version of the CoderHeroes app. This release is about a simplified version of the earliest features.
 
