@@ -37,9 +37,15 @@
 
 ![Typography](/figma-ui-kit/typography.png)
 
-## Cards Placeholder
+## Cards
 
-<!-- ![Cards Placeholder](/figma-ui-kit/cards-placeholder/cards-placeholder.png) -->
+![Basic Cards](/figma-ui-kit/cards/basic-cards.png)
+![Clickable Cards](/figma-ui-kit/cards/clickable-cards.png)
+![Image Cards](/figma-ui-kit/cards/img-cards.png)
+![Image/Component Cards](/figma-ui-kit/cards/img-comment-cards.png)
+![Multiple Components Cards](/figma-ui-kit/cards/multiple-components-cards.png)
+![Multiple Components Cards](/figma-ui-kit/cards/multiple-components-cards-2.png)
+![Multiple Components Cards](/figma-ui-kit/cards/multiple-components-cards-3.png)
 
 ## Buttons
 
