@@ -2,7 +2,7 @@
 
 <p> *NOTE: A JWT will be included in the authorization header for every request <p>
 
-<h1>Profiles</h1>
+#Profiles
 
 ```
 
@@ -45,7 +45,7 @@
 }
 ```
 
-<h1>Parents</h1>
+#Parents
 
 ```
 {
@@ -54,12 +54,12 @@
 }
 ```
 
-| Method | URL                            | Description                                                                           |
-| ------ | ------------------------------ | ------------------------------------------------------------------------------------- |
-| [GET]  | /parent/{profile_id}/children/  | Returns an array filled with children event objects with the specified `profile_id`.  |
-| [GET]  | /parent/{profile_id}/schedules/ | Returns an array filled with schedules event objects with the specified `profile_id`. |
+| Method | URL                            | Description                                                                            |
+| ------ | ------------------------------ |----------------------------------------------------------------------------------------|
+| [GET]  | /parent/{profile_id}/children/  | Returns an array filled with children event objects with the specified `profile_id`.   |
+| [GET]  | /parent/{profile_id}/schedules/ | Returns an array filled with schedules event objects with the specified `profile_id`.  |
 
-<h1>Children</h1>
+#Children
 
 ```
 {
@@ -84,7 +84,7 @@
 | [DELETE] | /children/{child_id}/enrollments/{course_id}       | Returns the event object with the specified `id`. Unenrolls student from course.   |
 **NOTE: should we seperate the children enrollments from the other children endpoints
 
-<h1>Instructors</h1>
+#Instructors
 
 ```
 {
@@ -106,7 +106,7 @@
 | [PUT]    | /instructor/{instructor_id}/update | Updates instructor profile                                                                            |
 | [DELETE] | /instructor/{instructor_id}/delete | Deletes instructor profile (Soft delete?)                                                             |   
 
-<h1>Programs</h1>
+#Programs
 
 ```
 {
@@ -124,7 +124,7 @@
 | [PUT]    | /program/{program_id} | Updates the program with the specified `id` using data from the `request body`. Returns the modified program |
 | [DELETE] | /program/{program_id} | Removes the program with the specified `id` and returns deletion success message .                           |
 
-<h1>Courses</h1>
+#Courses
 
 ```
 {
@@ -156,7 +156,7 @@
 | [PUT]    | /course/{course_id} | Updates and returns the updated course object with the specified `course_id`.                                                          |
 | [DELETE] | /course/{course_id} | Deletes the course object with the specified `course_id` and returns a message containing the deleted course_id on successful deletion |
 
-<h1>Newsfeed</h1>
+#Newsfeed
 
 ```
 {
@@ -176,7 +176,7 @@
 | [PUT]    | /newsfeed/{newsfeed_id}  | Updates the newsfeed object with the given newsfeed_id and returns the newly updated newsfeed |
 | [DELETE] | /newsfeed/{newsfeed_id}  | Deletes the newsfeed object with the given newsfeed_id and returns the deleted newsfeed.      |
 
-<h1>Conversations</h1>
+#Conversations
 
 ```
 {
@@ -194,7 +194,7 @@
 | [PUT]    | /conversation_id/{profile_id} | Returns an array filled with event objects with the specific `profile_id`. Updates an inbox.                                     |
 | [DELETE] | /conversation_id/{profile_id} | Returns an array filled with event objects. Deletes an inbox.                                           |
 
-<h1>Calendar Events</h1>
+#Calendar Events
 
 ```
 {
@@ -217,7 +217,7 @@
 | [PUT]    | /calendar-events/{event_id}  | Updates and returns the updated calendar event object with the specific `event_id`. |
 | [DELETE] | /calendar-events/{event_id}  | Deletes a calendar event and returns a success message on successful deletion.      |
 
-<h1>Schedule (Not Implemented)</h1>
+#Schedule (Not Implemented)
 
 | Method   | URL                 | Description                                                                  |
 | -------- | ------------------- | ---------------------------------------------------------------------------- |
