@@ -2,7 +2,7 @@
 
 <p> *NOTE: A JWT will be included in the authorization header for every request <p>
 
-#Profiles
+# Profiles
 
 ```
 
