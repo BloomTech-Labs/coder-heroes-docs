@@ -23,7 +23,7 @@
 | [POST]   | /profile/                         | Requires a name, and email. Registers a new user.                                                                        |
 | [PUT]    | /profile/{profile_id}             | Updates specific profile.                                                                                                |
 
-#### User:
+# User:
 
 <p>These endpoints are user-focused. As opposed to the more flexible Profile endpoints where <b>profile_id</b> must be specified, these endpoints retrieve data specific only to the user profile that is making the API request by using the logged-in user's <b>profile_id</b>.</p>
 
