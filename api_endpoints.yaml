@@ -107,7 +107,7 @@ paths:
         in: "path"
         description: "profile_id to find the corresponding profile"
         required: true
-        type: ""
+        type: "integer"
       responses:
         "200":
           description: "successful operation"
@@ -117,44 +117,93 @@ paths:
               $ref: "#/definitions/Profile"
         "400":
           description: "invalid profile id"
-        "404"
+        "404":
           description: "profile not found"
       security:
-      - petstore_auth:
+      - profile_auth:
         - "read:profile"
-  /profile/findByTags:
-    get:
+        
+    put:
       tags:
-      - "pet"
-      summary: "Finds Pets by tags"
-      description: "Muliple tags can be provided with comma separated strings. Use         tag1, tag2, tag3 for testing."
-      operationId: "findPetsByTags"
+      - "profile"
+      summary: "Updated a profile"
+      description: "Update a user profile."
+      operationId: "update"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
-      - name: "tags"
-        in: "query"
-        description: "Tags to filter by"
+      - name: "profile_id"
+        in: "path"
+        description: "profile_id to update the corresponding profile"
         required: true
-        type: "array"
+        type: "integer"
+      responses:
+        "200":
+            description: "successful operation"
+            schema:
+              type: "array"
+              items:
+                $ref: "#/definitions/Profile"
+        "400":
+          description: "invalid profile id"
+        "404":
+          description: "profile not found"
+      security:
+      - profile_auth:
+        - "read:profile"
+        - "write:profile"
+        
+  /profile/role/{role_id}:
+    get:
+      tags:
+      - "profile"
+      summary: "Finds all profiles by role_id"
+      description: "Use role_id to find all associated profiles"
+      operationId: "findByRoleId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "role_id"
+        in: "path"
+        description: "role_id to filter by"
+        required: true
+        type: "string"
         items:
           type: "string"
-        collectionFormat: "multi"
       responses:
         "200":
           description: "successful operation"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Pet"
+              $ref: "#/definitions/Profile"
+            example:
+              testProfile1:
+                value:
+                  profile_id: 10
+                  email: "test@email.com"
+                  name: "bob"
+                  auth0_id: "234234923742983"
+                  role: "admin"
+                  avatarUrl: "profileImageUrl"
+                  pending: "accountStatus"
+              testProfile2:
+                value:
+                  profile_id: 10
+                  email: "test@email.com"
+                  name: "bob"
+                  auth0_id: "234234923742983"
+                  role: "admin"
+                  avatarUrl: "profileImageUrl"
+                  pending: "accountStatus"     
         "400":
-          description: "Invalid tag value"
+          description: "Invalid role_id"
+        "404":
+          description: "no profiles associated with that role_id."  
       security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-      deprecated: true
+      - profile_auth:
+        - "read:profile"
+        
   /profile/{petId}:
     get:
       tags:
