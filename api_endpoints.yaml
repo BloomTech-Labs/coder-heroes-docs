@@ -57,74 +57,71 @@ paths:
           description: "Invalid input"
       security:
       - profile_auth:
-        - "read:profiles"
-    put:
+        - "read:profile"
+    post:
       tags:
-      - "pet"
-      summary: "Update an existing pet"
-      description: ""
-      operationId: "updatePet"
+      - "profile"
+      summary: "creates a new profile"
+      description: "Requires a name and email. Registers a new user"
+      operationId: "create"
       consumes:
       - "application/json"
-      - "application/xml"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
+        - in: "body"
+          name: "user"
+          description: "The user to create"
+          schema:
+            type: "object"
+            required: 
+              - "firstname"
+              - "lastname"
+              - "email"
+            properties:
+              firstname:
+                type: "string"
+              lastname:
+                type: "string"
+              email:
+                type: "string"
       responses:
+        "201":
+          description: "Profile created"
         "400":
-          description: "Invalid ID supplied"
-        "404":
-          description: "Pet not found"
-        "405":
-          description: "Validation exception"
+          description: "Invalid Email supplied"
       security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /profile/findByStatus:
+      - profile_auth:
+        - "write:profile"
+  /profile/{profile_id}:
     get:
       tags:
-      - "pet"
-      summary: "Finds Pets by status"
-      description: "Multiple status values can be provided with comma separated strings"
-      operationId: "findPetsByStatus"
+      - "profile"
+      summary: "Finds a proflie by profileId"
+      description: "uses a profile Id to find a profile with its attached users"
+      operationId: "findById"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
-      - name: "status"
-        in: "query"
-        description: "Status values that need to be considered for filter"
+      - name: "profile_id"
+        in: "path"
+        description: "profile_id to find the corresponding profile"
         required: true
-        type: "array"
-        items:
-          type: "string"
-          enum:
-          - "available"
-          - "pending"
-          - "sold"
-          default: "available"
-        collectionFormat: "multi"
+        type: ""
       responses:
         "200":
           description: "successful operation"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/Pet"
+              $ref: "#/definitions/Profile"
         "400":
-          description: "Invalid status value"
+          description: "invalid profile id"
+        "404"
+          description: "profile not found"
       security:
       - petstore_auth:
-        - "write:pets"
-        - "read:pets"
+        - "read:profile"
   /profile/findByTags:
     get:
       tags:
@@ -576,7 +573,8 @@ securityDefinitions:
     tokenUrl: ""
     flow: "accessCode"
     scopes:
-      read:profile: "read your profile"
+      read:profile: "read a profile"
+      write:profile: "write a profile"
   api_key:
     type: "apiKey"
     name: "api_key"
