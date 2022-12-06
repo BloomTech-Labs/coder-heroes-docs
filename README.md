@@ -12,4 +12,5 @@ Documentation for the Coder Heroes LMS Labs project
 - [BL-502](/homepage_launch.md#bl-502---ux-create-a-new-set-of-site-fonts-to-be-used-on-the-app) - UX: Create a new set of site fonts to be used on the app
 - [BL-513](/homepage_launch.md#bl-513---ux-iterate-design-artifacts-to-include-about-and-services-pages) - UX: Iterate design artifacts to include About and Services pages
 - [BL-989](/api-swagger-docs.md) - Link to API Swagger documentaion
+- [BL-1052]() - BE: Create backend project design
 ---

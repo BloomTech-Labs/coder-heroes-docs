@@ -1542,7 +1542,7 @@ securityDefinitions:
 
 securtiy:
   - userAuth: []
-  
+
 definitions:
   Profile:
     type: "object"
