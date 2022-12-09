@@ -7,6 +7,7 @@ info:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: "localhost:8080"
+
 tags:
 - name: "profile"
   description: "Information about Profiles"
@@ -14,12 +15,32 @@ tags:
   description: "Individual users in a profile"
 - name: "parent"
   description: "Information about parent users"
+- name: "child"
+  description: "Information about a child/student user"
+- name: "instructor"
+  description: "Information about a instructor user"
+- name: "program"
+  description: "Information about a program"
+- name: "course"
+  description: "Information about a course"
+- name: "newsfeed"
+  description: "Information about a newsfeed"
+- name: "conversation"
+  description: "Information about a conversation"
+- name: "calendar-event"
+  description: "Information about a calendar event"  
+- name: "schedule"
+  description: "Information about a child/student schedule"
+
 schemes:
-- "https"
-- "http"
+  - "https"
+  - "http"
+
 paths:
   /profile:
     get:
+      security:
+        - userAuth: []
       tags:
         - "profile"
       summary: "Retrieves all existing profiles"
@@ -30,6 +51,142 @@ paths:
       responses:
         "200":
           description: "Valid input"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Profile"
+            example:
+              profile1:
+                value:
+                  profile_id: 10
+                  email: "test@email.com"
+                  name: "bob"
+                  auth0_id: "234234923742983"
+                  role: "admin"
+                  avatarUrl: "profileImageUrl"
+                  pending: "accountStatus"
+              profile2:
+                value:
+                  profile_id: 10
+                  email: "test@email.com"
+                  name: "bob"
+                  auth0_id: "234234923742983"
+                  role: "admin"
+                  avatarUrl: "profileImageUrl"
+                  pending: "accountStatus"    
+        "405":
+          description: "Invalid input"
+    post:
+      security:
+        - userAuth: []
+      tags:
+      - "profile"
+      summary: "creates a new profile"
+      description: "Requires a name and email. Registers a new user"
+      operationId: "create"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "body"
+          name: "user"
+          description: "The user to create"
+          schema:
+            type: "object"
+            required: 
+              - "firstname"
+              - "lastname"
+              - "email"
+            properties:
+              firstname:
+                type: "string"
+              lastname:
+                type: "string"
+              email:
+                type: "string"
+      responses:
+        "201":
+          description: "Profile created"
+        "400":
+          description: "Invalid Email supplied"
+  /profile/{profile_id}:
+    get:
+      security:
+        - userAuth: []
+      tags:
+      - "profile"
+      summary: "Finds a proflie by profileId"
+      description: "uses a profile Id to find a profile with its attached users"
+      operationId: "findById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "profile_id"
+        in: "path"
+        description: "profile_id to find the corresponding profile"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Profile"
+        "400":
+          description: "invalid profile id"
+        "404":
+          description: "profile not found"
+    put:
+      security:
+        - userAuth: []
+      tags:
+      - "profile"
+      summary: "Updated a profile"
+      description: "Update a user profile."
+      operationId: "update"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "profile_id"
+        in: "path"
+        description: "profile_id to update the corresponding profile"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+            description: "successful operation"
+            schema:
+              type: "array"
+              items:
+                $ref: "#/definitions/Profile"
+        "400":
+          description: "invalid profile id"
+        "404":
+          description: "profile not found"
+  /profile/role/{role_id}:
+    get:
+      security:
+        - userAuth: []
+      tags:
+      - "profile"
+      summary: "Finds all profiles by role_id"
+      description: "Use role_id to find all associated profiles"
+      operationId: "findByRoleId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "role_id"
+        in: "path"
+        description: "role_id to filter by"
+        required: true
+        type: "string"
+        items:
+          type: "string"
+      responses:
+        "200":
+          description: "successful operation"
           schema:
             type: "array"
             items:
@@ -52,537 +209,1340 @@ paths:
                   auth0_id: "234234923742983"
                   role: "admin"
                   avatarUrl: "profileImageUrl"
-                  pending: "accountStatus"    
-        "405":
-          description: "Invalid input"
+                  pending: "accountStatus"     
+        "400":
+          description: "Invalid role_id"
+        "404":
+          description: "no profiles associated with that role_id."  
+      
+  /user:
+    get:
       security:
-      - profile_auth:
-        - "read:profiles"
+        - userAuth: []
+      tags:
+      - "user"
+      summary: "Returns an event object with the specified type"
+      description: "This can only be done by the logged in user."
+      operationId: "findUserData"
+      produces:
+      - "application/json"
+      responses:
+        default:
+          description: "successful operation"
+  /user/inbox:
+    get:
+      security:
+        - userAuth: []
+      tags:
+      - "user"
+      summary: "Returns an event object"
+      description: "This can only be done by the logged in user."
+      operationId: "getInbox"
+      produces:
+      - "application/json"
+      responses:
+        default:
+          description: "successful operation"
+  /user/schedules:
+    get:
+      security:
+        - userAuth: []
+      tags:
+      - "user"
+      summary: "Returns an schedule object"
+      description: "A list of enrolled courses_id's with start and end times."
+      operationId: "getSchedule"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+  /user/{user_id}:
     put:
-      tags:
-      - "pet"
-      summary: "Update an existing pet"
-      description: ""
-      operationId: "updatePet"
-      consumes:
-      - "application/json"
-      - "application/xml"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Pet object that needs to be added to the store"
-        required: true
-        schema:
-          $ref: "#/definitions/Pet"
-      responses:
-        "400":
-          description: "Invalid ID supplied"
-        "404":
-          description: "Pet not found"
-        "405":
-          description: "Validation exception"
       security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /profile/findByStatus:
-    get:
+        - userAuth: []
       tags:
-      - "pet"
-      summary: "Finds Pets by status"
-      description: "Multiple status values can be provided with comma separated strings"
-      operationId: "findPetsByStatus"
+      - "user"
+      summary: "Updates specific user"
+      description: "Returns an event object with the specified user_id. Updates specific user"
+      operationId: "updateUserData"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
-      - name: "status"
-        in: "query"
-        description: "Status values that need to be considered for filter"
-        required: true
-        type: "array"
-        items:
-          type: "string"
-          enum:
-          - "available"
-          - "pending"
-          - "sold"
-          default: "available"
-        collectionFormat: "multi"
-      responses:
-        "200":
-          description: "successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Pet"
-        "400":
-          description: "Invalid status value"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /profile/findByTags:
-    get:
-      tags:
-      - "pet"
-      summary: "Finds Pets by tags"
-      description: "Muliple tags can be provided with comma separated strings. Use         tag1, tag2, tag3 for testing."
-      operationId: "findPetsByTags"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - name: "tags"
-        in: "query"
-        description: "Tags to filter by"
-        required: true
-        type: "array"
-        items:
-          type: "string"
-        collectionFormat: "multi"
-      responses:
-        "200":
-          description: "successful operation"
-          schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/Pet"
-        "400":
-          description: "Invalid tag value"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-      deprecated: true
-  /profile/{petId}:
-    get:
-      tags:
-      - "pet"
-      summary: "Find pet by ID"
-      description: "Returns a single pet"
-      operationId: "getPetById"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - name: "petId"
+      - name: "user_id"
         in: "path"
-        description: "ID of pet to return"
+        description: "The logged-in user_id"
         required: true
-        type: "integer"
-        format: "int64"
+        type: "string"
       responses:
         "200":
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Pet"
+            $ref: "#/definitions/User"
         "400":
-          description: "Invalid ID supplied"
+          description: "invalid user id"
         "404":
-          description: "Pet not found"
-      security:
-      - api_key: []
+          description: "user not found"  
+  /user/register:
     post:
+      security:
+        - userAuth: []
       tags:
-      - "pet"
-      summary: "Updates a pet in the store with form data"
-      description: ""
-      operationId: "updatePetWithForm"
+      - "user"
+      summary: "Register a new user"
+      description: "Register a new user in the database and in the Okta Dashboard"
+      operationId: ""
       consumes:
-      - "application/x-www-form-urlencoded"
-      produces:
-      - "application/xml"
       - "application/json"
-      parameters:
-      - name: "petId"
-        in: "path"
-        description: "ID of pet that needs to be updated"
-        required: true
-        type: "integer"
-        format: "int64"
-      - name: "name"
-        in: "formData"
-        description: "Updated name of the pet"
-        required: false
-        type: "string"
-      - name: "status"
-        in: "formData"
-        description: "Updated status of the pet"
-        required: false
-        type: "string"
-      responses:
-        "405":
-          description: "Invalid input"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-    delete:
-      tags:
-      - "pet"
-      summary: "Deletes a pet"
-      description: ""
-      operationId: "deletePet"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - name: "api_key"
-        in: "header"
-        required: false
-        type: "string"
-      - name: "petId"
-        in: "path"
-        description: "Pet id to delete"
-        required: true
-        type: "integer"
-        format: "int64"
-      responses:
-        "400":
-          description: "Invalid ID supplied"
-        "404":
-          description: "Pet not found"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /profile/{petId}/uploadImage:
-    post:
-      tags:
-      - "pet"
-      summary: "uploads an image"
-      description: ""
-      operationId: "uploadFile"
-      consumes:
-      - "multipart/form-data"
       produces:
       - "application/json"
       parameters:
-      - name: "petId"
-        in: "path"
-        description: "ID of pet to update"
-        required: true
-        type: "integer"
-        format: "int64"
-      - name: "additionalMetadata"
-        in: "formData"
-        description: "Additional data to pass to server"
-        required: false
-        type: "string"
-      - name: "file"
-        in: "formData"
-        description: "file to upload"
-        required: false
-        type: "file"
-      responses:
-        "200":
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/ApiResponse"
-      security:
-      - petstore_auth:
-        - "write:pets"
-        - "read:pets"
-  /store/inventory:
-    get:
-      tags:
-      - "store"
-      summary: "Returns pet inventories by status"
-      description: "Returns a map of status codes to quantities"
-      operationId: "getInventory"
-      produces:
-      - "application/json"
-      parameters: []
-      responses:
-        "200":
-          description: "successful operation"
+        - in: "body"
+          name: "user"
+          description: "The user to create"
           schema:
             type: "object"
-            additionalProperties:
-              type: "integer"
-              format: "int32"
+            required:
+              - "firstname"
+              - "lastname"
+              - "email"
+            properties:
+              firstname:
+                type: "string"
+              lastname:
+                type: "string"
+              email:
+                type: "string"
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/User"
+        "400":
+          description: "Bad request"
+          
+  /parent/{profile_id}/children/:
+    get:
       security:
-      - api_key: []
-  /store/order:
-    post:
+        - userAuth: []
       tags:
-      - "store"
-      summary: "Place an order for a pet"
-      description: ""
-      operationId: "placeOrder"
+      - "parent"
+      summary: "Find the children users"
+      description: "Returns an array of the children that are attached to the given parents profile"
+      operationId: "getChildrenByProfileId"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
-      - in: "body"
-        name: "body"
-        description: "order placed for purchasing the pet"
-        required: true
-        schema:
-          $ref: "#/definitions/Order"
-      responses:
-        "200":
-          description: "successful operation"
-          schema:
-            $ref: "#/definitions/Order"
-        "400":
-          description: "Invalid Order"
-  /store/order/{orderId}:
-    get:
-      tags:
-      - "store"
-      summary: "Find purchase order by ID"
-      description: "For valid response try integer IDs with value >= 1 and <= 10.         Other values will generated exceptions"
-      operationId: "getOrderById"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - name: "orderId"
+      - name: "profile_id"
         in: "path"
-        description: "ID of pet that needs to be fetched"
+        description: "Id of profile to use to find corresponding users"
         required: true
         type: "integer"
-        maximum: 10.0
-        minimum: 1.0
-        format: "int64"
       responses:
         "200":
           description: "successful operation"
           schema:
-            $ref: "#/definitions/Order"
+            $ref: "#/definitions/Children"
+        "400":
+          description: "Invalid profile_Id"
+        "404":
+          description: "Profile not found"
+  /parent/{profile_id}/schedules/:
+    get:
+      security:
+        - userAuth: []
+      tags:
+      - "parent"
+      summary: "retrieves the profiles schedules"
+      description: "returns an array of schedules associated with the give profile"
+      operationId: "getSchedulesByProfileId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "profile_id"
+        in: "path"
+        description: "ID of profile to get schedules from"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Course"
+        "400":
+          description: "Invalid profile_id"
+        "404":
+          description: "Profile not found"
+  
+  /children:
+    get:
+      security:
+        - userAuth: []
+      tags: 
+        - "child"
+      summary: "Retrieves all existing children"
+      description: "Returns an array containing all existing children"
+      operationId: "getChildren"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Valid input"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Children"
+            example:
+              child1:
+                value:
+                  child_id: 10
+                  profile_id: 10
+                  username: "username"
+                  age: 10
+                  parent_id: 10
+              child2:
+                value:
+                  child_id: 10
+                  profile_id: 10
+                  username: "username"
+                  age: 10
+                  parent_id: 10
+        "405":
+          description: "Invalid input"
+    post:
+      security:
+        - userAuth: []
+      tags:
+        - "child"
+      summary: "Creates a new child/student profile"
+      description: "Requires a username, name, and age. Returns the name, profile_id and parent_id"
+      operationId: "addChild"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "body"
+          name: "student"
+          description: "The student profile to create"
+          schema:
+            type: "object"
+            required:
+              - "username"
+              - "name"
+              - "age"
+            properties:
+              username:
+                type: "string"
+              name:
+                type: "string"
+              age:
+                type: "integer"
+      responses:
+        "201":
+          description: "Student profile created"
+          schema:
+            type: "object"
+            properties:
+              name:
+                type: "string"
+              profile_id:
+                type: "integer"
+              parent_id:
+                type: "integer"
+        "400":
+          description: "Invalid values"
+  /children/{child_id}:
+    get:
+      security:
+        - userAuth: []
+      tags: 
+        - "child"
+      summary: "Retrieves the child profile associated with the given ID"
+      description: "Returns child object associated with given ID"
+      operationId: "findByChildId"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "child_id"
+          in: "path"
+          description: "ID of child to return"
+          required: true
+          type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Children"
         "400":
           description: "Invalid ID supplied"
         "404":
-          description: "Order not found"
+          description: "Child not found"
+    put:
+      security:
+        - userAuth: []
+      tags: 
+        - "child"
+      summary: "Updates the child profile associated with the given ID"
+      description: "Updates the child object associated with the given ID and then returns updated version"
+      operationId: "updateChild"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "child_id"
+          in: "path"
+          description: "ID of child that needs to be updated"
+          required: true
+          type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Children"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Child not found"
     delete:
-      tags:
-      - "store"
-      summary: "Delete purchase order by ID"
-      description: "For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors"
-      operationId: "deleteOrder"
+      security:
+        - userAuth: []
+      tags: 
+        - "child"
+      summary: "Deletes the child profile associated with the given ID"
+      description: "Deletes the child object associated with the given ID and then returns the name of the child deleted"
+      operationId: "removeChild"
       produces:
-      - "application/xml"
-      - "application/json"
+      - "application/jason"
       parameters:
-      - name: "orderId"
+      - name: "child_id"
         in: "path"
-        description: "ID of the order that needs to be deleted"
+        description: "Child Id to delete"
         required: true
         type: "integer"
-        minimum: 1.0
-        format: "int64"
       responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            properties:
+              username:
+                type: "string"
+                example: "Tommy"
         "400":
           description: "Invalid ID supplied"
         "404":
-          description: "Order not found"
-  /user:
-    post:
-      tags:
-      - "user"
-      summary: "Create user"
-      description: "This can only be done by the logged in user."
-      operationId: "createUser"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "Created user object"
-        required: true
-        schema:
-          $ref: "#/definitions/User"
-      responses:
-        default:
-          description: "successful operation"
-  /user/createWithArray:
-    post:
-      tags:
-      - "user"
-      summary: "Creates list of users with given input array"
-      description: ""
-      operationId: "createUsersWithArrayInput"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "List of user object"
-        required: true
-        schema:
-          type: "array"
-          items:
-            $ref: "#/definitions/User"
-      responses:
-        default:
-          description: "successful operation"
-  /user/createWithList:
-    post:
-      tags:
-      - "user"
-      summary: "Creates list of users with given input array"
-      description: ""
-      operationId: "createUsersWithListInput"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - in: "body"
-        name: "body"
-        description: "List of user object"
-        required: true
-        schema:
-          type: "array"
-          items:
-            $ref: "#/definitions/User"
-      responses:
-        default:
-          description: "successful operation"
-  /user/login:
+          description: "Child not found"        
+  /children/{child_id}/enrollments:
     get:
-      tags:
-      - "user"
-      summary: "Logs user into the system"
-      description: ""
-      operationId: "loginUser"
+      security:
+        - userAuth: []
+      tags: 
+        - "child"
+      summary: "Returns an array course_id's that correspond to the courses a child is enrolled in"
+      description: "Returns an array of coarse_id's associated with child_id"
+      operationId: "getEnrolledCourses"
       produces:
-      - "application/xml"
+        - "application/json"
+      parameters:
+        - name: "child_id"
+          in: "path"
+          description: "Id of child"
+          required: true
+          type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              type: "integer"
+              properties:
+                course_id: 
+                  type: "integer"
+            example:
+              course_id_1: 123
+              course_id_2: 456
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Child not found"
+    post:
+      security:
+        - userAuth: []
+      tags: 
+        - "child"
+      summary: "Enrolls a child/student into a new course"
+      description: "Adds the new course_id to the list of currently enrolled courses"
+      operationId: "addEnrolledCourse"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "child_id"
+          in: "path"
+          description: "Id of child"
+          required: true
+          type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            type: "array"
+            items:
+              type: "integer"
+              properties:
+                course_id: 
+                  type: "integer"
+            example:
+              course_id_1: 123
+              course_id_2: 456
+              course_id_New: 789
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Child not found"
+  /children/{child_id}/enrollments/{course_id}:
+    put:
+      security:
+        - userAuth: []
+      tags: 
+        - "child"
+      summary:  "Enrolls a child in a new course"
+      description: "Updates the child and course to reflect the new enrollment"
+      operationId: "enrollChild"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "child_id"
+          in: "path"
+          description: "ID of child"
+          required: true
+          type: "integer"
+        - name: "course_id"
+          in: "path"
+          description: "ID of course"
+          required: true
+          type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Course"
+        "400":
+          description: "Invalid child or course ID"
+        "404":
+          description: "Child not found or course not found"
+    delete:
+      security:
+        - userAuth: []
+      tags: 
+        - "child"
+      summary: "Unenrolls child from course"
+      description: "Delete course_id from child enrolled list"
+      operationId: "unenrollChild"
+      produces:
       - "application/json"
       parameters:
-      - name: "username"
-        in: "query"
-        description: "The user name for login"
+      - name: "child_id"
+        in: "path"
+        description: "Child ID"
         required: true
-        type: "string"
-      - name: "password"
-        in: "query"
-        description: "The password for login in clear text"
+        type: "integer"
+      - name: "course_id"
+        in: "path"
+        description: "Course ID"
         required: true
-        type: "string"
+        type: "integer"
+      responses:
+        "200":
+          description: "Successful unenrolled from {course_id}"
+          schema:
+            type: "integer"
+            example: 234234
+        "400":
+          description: "Invalid child or course ID"
+        "404":
+          description: "Child not found or course not found"
+
+  /instructor/courses/:
+    get:
+      security:
+        - userAuth: []
+      tags:
+      - "instructor"
+      summary: "retrieves courses"
+      description: "Returns an array of courses attached to the currently logged-in instructor"
+      operationId: "findInstructorCourses"
+      produces:
+      - "application/json"
       responses:
         "200":
           description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Course"
+            example:
+              Courses:
+                valuse:
+                  course_id: 245
+                  course_name: "intro to java"
+                  course_description: "this course is an intro to java"
+                  created_on: January 1, 2022
+                  days_of_week: ["Monday", "Tuesday", "Wednesday"]
+                  max_size: 14
+                  enrolled_students: 5
+                  mins_age: 13
+                  max_age: 18
+                  instructor: Elizabeth Taylor
+                  program: Java
+                  start_time: 11:00
+                  end_time: 12:00
+                  start_date: January 5, 2022
+                  end_date: January 17, 2022
+                  number_of_sessions: 6
+                  difficulty: "easy"
+                  session_type: "group"
+                  syllabus_link: "syllabus link"
+  /instructor/register:
+    post:
+      security:
+        - userAuth: []
+      tags:
+      - "instructor"
+      summary: "Register an instructor"
+      description: "Registers and instructor with data"
+      operationId: "registerInstructor"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "body"
+          name: "user"
+          description: "The user to register as instructor"
+          schema:
+            type: "object"
+            required: 
+              - "firstname"
+              - "lastname"
+              - "email"
+            properties:
+              firstname:
+                type: "string"
+              lastname:
+                type: "string"
+              email:
+                type: "string"
+      responses:
+        "201":
+          description: "Instructor registered"
+  /instructor/{instructor_id}/update:
+    put:
+      security:
+        - userAuth: []
+      tags:
+      - "instructor"
+      summary: "Updated a profile"
+      description: "Update a user profile."
+      operationId: "updateProfile"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "instructor_id"
+        in: "path"
+        description: "instructor_id to update the corresponding profile"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+            description: "successful operation"
+            schema:
+              $ref: "#/definitions/Profile"
+        "400":
+          description: "invalid instructor id"
+        "404":
+          description: "profile not found"
+  /instructor/{instructor_id}/delete:
+    delete:
+      security:
+        - userAuth: []
+      tags:
+      - "instructor"
+      summary: "Delete instructor"
+      description: "This can only be done by an admin."
+      operationId: "deleteInstructor"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "instructor_id"
+        in: "path"
+        description: "The id of the instructor to be deleted"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "Instructor has been deleted/Instructor has been set to inactive"
+        "400":
+          description: "Invalid id supplied"
+        "404":
+          description: "Instructor not found"
+    
+  /program:
+    get:
+      security:
+        - userAuth: []
+      tags:
+      - "program"
+      summary: "Returns an array filled with program objects"
+      description: ""
+      operationId: "getAll"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+    post:
+      security:
+        - userAuth: []
+      tags:
+      - "program"
+      summary: "Register a new program"
+      description: "Register a new program in the database"
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "body"
+          name: "program"
+          description: "The program to create"
+          schema:
+            type: "object"
+            required:
+              - "program_name"
+              - "program_description"
+            properties:
+              program_name:
+                type: "string"
+              program_description:
+                type: "string"
+      responses:
+        "201":
+          description: "successful operation"
+        "400":
+          description: "Bad request"
+  /program/{program_id}:
+    get:
+      security:
+        - userAuth: []
+      tags:
+      - "program"
+      summary: "Returns the program object with the specified id"
+      description: ""
+      operationId: "getById"
+      consumes :
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "program_id"
+        in: "path"
+        description: "program id"
+        type: "string"
+        required: true
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Program"
+        "400":
+          description: "Invalid program_id supplied"
+        "404":
+          description: "Program not found"  
+    put:
+      security:
+        - userAuth: []
+      tags:
+      - "program"
+      summary: "Updates the program object with the specified id"
+      description: ""
+      operationId: "updateProgram"
+      consumes :
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "program_id"
+        in: "path"
+        description: "program id"
+        type: "string"
+        required: true
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Program"
+        "400":
+          description: "Invalid program_id supplied"
+        "404":
+          description: "Program not found"    
+    delete:
+      security:
+        - userAuth: []
+      tags:
+      - "program"
+      summary: "Removes the program with the specified id"
+      description: ""
+      operationId: "remove"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "program_id"
+        in: "path"
+        description: "program id"
+        type: "string"
+        required: true
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Program"
+        "400":
+          description: "Invalid program_id supplied"
+        "404":
+          description: "Program not found"
+          
+  /course:
+    get:
+      security:
+        - userAuth: []
+      tags:
+      - "course"
+      summary: "Returns an array containing all course objects"
+      description: ""
+      operationId: "getAllCourses"
+      consumes :
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Course"
+    post:
+      security:
+        - userAuth: []
+      tags:
+      - "course"
+      summary: "needs to be fleshed out"
+      description: ""
+      operationId: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "body"
+          name: "course"
+          description: "The course to create"
+          schema:
+            $ref: "#/definitions/Course"
+      responses:
+        "201":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Course"
+        "400":
+          description: "Bad request"  
+  /course/{course_id}:
+    get:
+      security:
+        - userAuth: []
+      tags:
+      - "course"
+      summary: "Returns the course object with the specified course_id"
+      description: ""
+      operationId: "findByCourseId"
+      consumes :
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "course_id"
+        in: "path"
+        description: "course id"
+        type: "string"
+        required: true
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Course"
+        "400":
+          description: "Invalid course_id supplied"
+        "404":
+          description: "Course not found"    
+    put:
+      security:
+        - userAuth: []
+      tags:
+      - "course"
+      summary: "Updates and returns the updated course object with the specified course_id"
+      description: ""
+      operationId: "updateCourse"
+      consumes :
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "course_id"
+        in: "path"
+        description: "program id"
+        type: "string"
+        required: true
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Course"
+        "400":
+          description: "Invalid course_id supplied"
+        "404":
+          description: "Course not found"    
+    delete:
+      security:
+        - userAuth: []
+      tags:
+      - "course"
+      summary: "Deletes the course object with the specified course_id"
+      description: ""
+      operationId: "removeCourse"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "course_id"
+        in: "path"
+        description: "course id"
+        type: "string"
+        required: true
+      responses:
+        "200":
+          description: "Course {course_id} successfully deleted"
           schema:
             type: "string"
-          headers:
-            X-Rate-Limit:
-              type: "integer"
-              format: "int32"
-              description: "calls per hour allowed by the user"
-            X-Expires-After:
-              type: "string"
-              format: "date-time"
-              description: "date in UTC when token expires"
+            example:
+              course_id: 123231
         "400":
-          description: "Invalid username/password supplied"
-  /user/logout:
+          description: "Invalid course_id supplied"
+        "404":
+          description: "Course not found"      
+   
+  /newsfeed:
     get:
+      security:
+        - userAuth: []
       tags:
-      - "user"
-      summary: "Logs out current logged in user session"
-      description: ""
-      operationId: "logoutUser"
+      - "newsfeed"
+      summary: "Returns newsfeed for the day."
+      description: "Returns array containing all newsfeed objects"
+      operationId: "getNewsfeeds"
       produces:
-      - "application/xml"
       - "application/json"
-      parameters: []
-      responses:
-        default:
-          description: "successful operation"
-  /user/{username}:
-    get:
-      tags:
-      - "user"
-      summary: "Get user by user name"
-      description: ""
-      operationId: "getUserByName"
-      produces:
-      - "application/xml"
-      - "application/json"
-      parameters:
-      - name: "username"
-        in: "path"
-        description: "The name that needs to be fetched. Use user1 for testing. "
-        required: true
-        type: "string"
       responses:
         "200":
           description: "successful operation"
           schema:
-            $ref: "#/definitions/User"
+            $ref: "#/definitions/Newsfeed"
+    post:
+      security:
+        - userAuth: []
+      tags:
+      - "newsfeed"
+      summary: "Create a new newsfeed"
+      description: "Creates a new newsfeed object and returns the newly created object."
+      operationId: "createNewsfeed"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Newsfeed"
+  /newsfeed/{newsfeed_id}:
+    get:
+      security:
+        - userAuth: []
+      tags:
+      - "newsfeed"
+      summary: "Return requested newsfeed"
+      description: "Returns the newsfeed with the specified newsfeed_id"
+      operationId: "getNewsfeed"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "newsfeed_id"
+        in: "path"
+        description: "newsfeed_id to find the corresponding newsfeed"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Newsfeed"
         "400":
-          description: "Invalid username supplied"
+          description: "invalid newsfeed id"
         "404":
-          description: "User not found"
+          description: "Newsfeed not found"  
     put:
+      security:
+        - userAuth: []
       tags:
-      - "user"
-      summary: "Updated user"
-      description: "This can only be done by the logged in user."
-      operationId: "updateUser"
+      - "newsfeed"
+      summary: "Update a newsfeed"
+      description: "Update newsfeed object with given newsfeed_id and returns newly updated newsfeed"
+      operationId: "updateNewsfeed"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
-      - name: "username"
+      - name: "newsfeed_id"
         in: "path"
-        description: "name that need to be updated"
+        description: "newsfeed_id to update the corresponding newsfeed"
         required: true
-        type: "string"
-      - in: "body"
-        name: "body"
-        description: "Updated user object"
-        required: true
-        schema:
-          $ref: "#/definitions/User"
+        type: "integer"
       responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Newsfeed"
         "400":
-          description: "Invalid user supplied"
+          description: "invalid newsfeed id"
         "404":
-          description: "User not found"
+          description: "Newsfeed not found"   
     delete:
+      security:
+        - userAuth: []
       tags:
-      - "user"
-      summary: "Delete user"
-      description: "This can only be done by the logged in user."
-      operationId: "deleteUser"
+      - "newsfeed"
+      summary: "Delete newsfeed"
+      description: "Delete newsfeed object with given newsfeed_id and returns the deleted newsfeed"
+      operationId: "deleteNewsfeed"
       produces:
-      - "application/xml"
       - "application/json"
       parameters:
-      - name: "username"
+      - name: "newsfeed_id"
         in: "path"
-        description: "The name that needs to be deleted"
+        description: "newsfeed_id to delete the corresponding newsfeed"
         required: true
-        type: "string"
+        type: "integer"
       responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Newsfeed"
         "400":
-          description: "Invalid username supplied"
+          description: "invalid newsfeed id"
         "404":
-          description: "User not found"
+          description: "Newsfeed not found"   
+  
+  /conversation_id:
+    get:
+      security:
+        - userAuth: []
+      tags:
+        - "conversation"
+      summary: "Retrieves all messages corresponding to the conversation"
+      description: "This endpoint uses a get request to retrieve all messages related to the conversation_id"
+      operationId: "findByConversationId"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Valid input"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Conversation"
+            example:
+              testConversation1:
+                value:
+                  message_id: 10
+                  sent_at: 12:50 PM
+                  title: "Onboarding"
+                  read: false
+                  message: "Welcome to Coder Heroes!"
+                  profile_id: 143
+                  conversation: 1325
+              testConversation2:
+                value:
+                  message_id: 13
+                  sent_at: 11:40 AM
+                  title: "Email Verification"
+                  read: false
+                  message: "Welcome to Coder Heroes!"
+                  profile_id: 143
+                  conversation: 1325
+        "405":
+          description: "Invalid input"
+    post:
+      security:
+        - userAuth: []
+      tags:
+      - "conversation"
+      description: "This endpoint currently requires an inbox_id, which might not align with the current design of the codebase. Further clarification required."
+      responses:
+        "200":
+          description: "successful operation"
+  /conversation_id/{profile_id}:
+    get:
+      security:
+        - userAuth: []
+      tags:
+      - "conversation"
+      summary: "Finds a conversation by profileId"
+      description: "uses a profile Id to find a conversation thread with the related profile"
+      operationId: "findConversationByProfileId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "profile_id"
+        in: "path"
+        description: "profile_id to find the corresponding conversation"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Conversation"
+        "400":
+          description: "invalid profile id"
+        "404":
+          description: "Conversation not found"
+    put:
+      security:
+        - userAuth: []
+      tags:
+      - "conversation"
+      summary: "Update a Conversation"
+      description: "A PUT request to edit messages in a conversation."
+      operationId: "updateConversation"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "profile_id"
+        in: "path"
+        description: "profile_id to update the corresponding conversation"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+            description: "successful operation"
+            schema:
+              type: "array"
+              items:
+                $ref: "#/definitions/Conversation"
+        "400":
+          description: "invalid profile id"
+        "404":
+          description: "Conversation not found"
+    delete:
+      security:
+        - userAuth: []
+      tags:
+      - "conversation"
+      summary: "Deletes a Conversation"
+      description: "A DELETE Request that can be performed by the logged-in user"
+      operationId: "deleteConversationByProfileId"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "profile_id"
+        in: "path"
+        description: "The profile_id to find the conversation to delete"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "Conversation has been deleted"
+        "400":
+          description: "Invalid id supplied"
+        "404":
+          description: "Conversation` not found"
+  /conversation_id/messages:
+    post:
+      security:
+        - userAuth: []
+      tags:
+      - "conversation"  
+      description: "This endpoint currently requires an inbox_id, which might not align with the current design of the codebase. Further clarification required."
+      responses:
+        "200":
+          description: "Valid input"
+          
+  /calendar-events:
+    get:
+      security:
+        - userAuth: []
+      tags:
+        - "calendar-event"
+      summary: "Retrieves all calendar events associated with the logged in user"
+      description: "This endpoint uses a get request to retrieve all calendar events"
+      operationId: "getAllCalendarEvents"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Valid input"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Calendar-Event"
+            example:
+              testCalendarEvent1:
+                value:
+                  event_id: 874
+                  date: "February 23"
+                  time: "12:53"
+                  type: "group session"
+                  content: "Data Structures"
+                  details: "Learning about Queues and Stacks"
+        "405":
+          description: "Invalid input"
+    post:
+      security:
+        - userAuth: []
+      tags:
+      - "calendar-event"
+      summary: "creates a new CalendarEvent"
+      description: "creates a new Calendar Event with a POST request"
+      operationId: "addCalendarEvent"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "body"
+          name: "calender-event"
+          description: "The calender event to create"
+          schema:
+            type: "object"
+            required:
+              - "type"
+              - "content"
+              - "details"
+            properties:
+              type:
+                type: "string"
+              content:
+                type: "string"
+              details:
+                type: "string"
+      responses:
+        "201":
+          description: "Calendar event created"
+  /calendar-events/user:
+    get:
+      security:
+        - userAuth: []
+      tags:
+      - "calendar-event"
+      summary: "Returns an event object of calendar events associated with the logged in user"
+      description: "This can only be done by the logged in user."
+      operationId: "getCalendarEventByUser"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Calendar-Event"
+  /calendar-events/{event_id}:
+    get:
+      security:
+        - userAuth: []
+      tags:
+        - "calendar-event"
+      summary: "Retrieves the calendar event associated with the given ID"
+      description: "Returns calendar event object associated with given ID"
+      operationId: "findByEventId"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "event_id"
+          in: "path"
+          description: "ID of event to return the calendar of"
+          required: true
+          type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Calendar-Event"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Calendar event not found"
+    put:
+      security:
+        - userAuth: []
+      tags:
+        - "calendar-event"
+      summary: "Updates the calendar event associated with the given ID"
+      description: "Updates the calendar event object associated with the given ID and then returns updated version"
+      operationId: "updateCalendarEvent"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "event_id"
+          in: "path"
+          description: "ID of calendar that needs to be updated"
+          required: true
+          type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Calendar-Event"
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Calendar event not found"
+    delete:
+      security:
+        - userAuth: []
+      tags:
+      - "calendar-event"
+      summary: "Delete calendar event"
+      description: "This can only be done with the proper permissions."
+      operationId: "deleteCalendarEvent"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "event_id"
+        in: "path"
+        description: "The id of the calendar event to be deleted"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "Calendar event has been deleted"
+        "400":
+          description: "Invalid id supplied"
+        "404":
+          description: "Calendar event not found"
+ 
+  /schedule:
+    get:
+      security:
+        - userAuth: []
+      tags:
+        - "schedule"
+      summary: "A list of All courses with their start and end times"
+      description: "A ordered list of course names/id's with their start and end time. Used by admins and instructors."
+      operationId: "getSchedules"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+    post:
+      security:
+        - userAuth: []
+      tags:
+        - "schedule"
+      summary: ""
+      description: ""
+      operationId: ""
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+    put:
+      security:
+        - userAuth: []
+      tags:
+        - "schedule"
+      summary: ""
+      description: ""
+      operationId: ""
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+  /schedule/{id}:
+    get:
+      security:
+        - userAuth: []
+      tags:
+        - "schedule"
+      summary: ""
+      description: ""
+      operationId: ""
+      produces:
+      - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID needed to retrieve schedule"
+          required: true
+          type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+        "400":
+          description: "Invalid id supplied"
+        "404":
+          description: "Object not found"  
+    delete:
+      security:
+        - userAuth: []
+      tags:
+        - "schedule"
+      summary: ""
+      description: ""
+      operationId: ""
+      produces:
+      - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID needed to delete schedule"
+          required: true
+          type: "integer"
+      responses:
+        "200":
+          description: "Successful operation"
+        "400":
+          description: "Invalid id supplied"
+        "404":
+          description: "Object not found"  
+  /schedule/sessions:
+    post:
+      security:
+        - userAuth: []
+      tags:
+        - "schedule"
+      summary: ""
+      description: "Details TBD"
+      operationId: ""
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
           
           
 securityDefinitions:
-  profile_auth:
-    type: "oauth2"
-    authorizationUrl: ""
-    tokenUrl: ""
-    flow: "accessCode"
-    scopes:
-      read:profile: "read your profile"
-  api_key:
-    type: "apiKey"
-    name: "api_key"
-    in: "header"
-    
-    
+  userAuth:
+    type: basic
+
+securtiy:
+  - userAuth: []
+
 definitions:
   Profile:
     type: "object"
@@ -609,97 +1569,164 @@ definitions:
         type: "string"
       pending:
         type: "string"
-  Category:
-    type: "object"
-    properties:
-      id:
-        type: "integer"
-        format: "int64"
-      name:
-        type: "string"
-    xml:
-      name: "Category"
   User:
     type: "object"
     properties:
-      id:
-        type: "integer"
-        format: "int64"
-      username:
-        type: "string"
       firstName:
         type: "string"
       lastName:
         type: "string"
       email:
         type: "string"
-      password:
-        type: "string"
-      phone:
-        type: "string"
-      userStatus:
+      role_id:
         type: "integer"
-        format: "int32"
-        description: "User Status"
-    xml:
-      name: "User"
-  Tag:
+        description: "Role status"
+      avatarUrl:
+        type: "string"
+  Parent:
+    description: "Details TBD"
+  Children:
     type: "object"
     properties:
-      id:
+      child_id:
         type: "integer"
-        format: "int64"
-      name:
+      profile_id: 
+        type: "integer"
+      username: 
         type: "string"
-    xml:
-      name: "Tag"
-  Pet:
+        example: "Tommy"
+      age: 
+        type: "integer"
+      parent_id:
+        type: "integer"
+  Instructor:
+    description: "Details TBD"
+  Program:
     type: "object"
-    required:
-    - "name"
-    - "photoUrls"
     properties:
-      id:
+      program_id:
         type: "integer"
-        format: "int64"
-      category:
-        $ref: "#/definitions/Category"
-      name:
+        example: 312432
+      program_name:
         type: "string"
-        example: "doggie"
-      photoUrls:
+        example: "Coding Yoga"
+      program_description:
+        type: "string"
+        example: "A program where executive's children do yoga and code!"
+  Course:
+    type: "object"
+    properties:
+      course_id:
+        type: "integer"
+      course_name:
+        type: "string"
+      course_description:
+        type: "string"
+      days_of_week:
         type: "array"
-        xml:
-          name: "photoUrl"
-          wrapped: true
         items:
           type: "string"
-      tags:
-        type: "array"
-        xml:
-          name: "tag"
-          wrapped: true
-        items:
-          $ref: "#/definitions/Tag"
-      status:
+      max_size:
+        type: "integer"
+      min_age:
+        type: "integer"
+      max_age:
+        type: "integer"
+      instructor_id:
+        type: "integer"
+      program_id:
+        type: "integer"
+      start_time:
+        type: "object"
+      end_time:
+        type: "object"
+      start_date:
+        type: "object"
+      end_date:
+        type: "object"
+      location:
         type: "string"
-        description: "pet status in the store"
-        enum:
-        - "available"
-        - "pending"
-        - "sold"
-    xml:
-      name: "Pet"
-  ApiResponse:
+      number_of_sessions:
+        type: "integer"
+      instructor_name:
+        type: "string"
+      syllabus_link:
+        type: "string"
+  Newsfeed:
     type: "object"
     properties:
-      code:
+      newsfeed_id:
         type: "integer"
-        format: "int32"
-      type:
+        example: 234235
+      title:
         type: "string"
+        example: "New teacher hired!"
+      link:
+        type: "string"
+        example: "www.link.com"
+      description:
+        type: "string"
+        example: "We are welcoming Mr.Burns as a new teacher. Excellent!"
+      posted_at:
+        type: "object"
+        properties:
+          timestamp:
+            type: "string"
+            example: "12/01/22-5:30"
+  Conversation:
+    type: "object"
+    properties:
+      messages_id:
+        type: "integer"
+        format: "int64"
+        example: 143
+      sent_at:
+        type: "object"
+        example: 11:43 AM
+      title:
+        type: "string"
+        example: "Java 101 start time change"
+      read:
+        type: "boolean"
+        example: true
       message:
         type: "string"
+        example: "I had something personal come up. The class will be delayed today and will start at 12:00 PM"
+      profile_id:
+        type: "integer"
+        example: 1230
+      conversation:
+        type: "object"
+        example:
+          - type: "integer"
+            name: "conversation_id"
+            example: 187187
+          - type: "integer"
+            name: "profile_id"
+            example: 298372
+  Calendar-Event:
+    type: "object"
+    properties:
+      event_id:
+        type: "integer"
+        format: "int64"
+        example: 519
+      date:
+        type: "string"
+        example: "January 1st, 2023"
+      time:
+        type: "string"
+        example: "11:00"
+      type:
+        type: "string"
+      content:
+        type: "string"
+      details:
+        type: "string"
+  Schedule:
+    description: "Details TBD"
+
+        
 externalDocs:
-  description: "Find out more about Swagger"
-  url: "http://swagger.io"
+  description: "Find out more about CoderHeroes"
+  url: "https://github.com/BloomTech-Labs/coder-heroes-docs/blob/BL-1052-bd-design-development-plan/backend_design_doc.md"
